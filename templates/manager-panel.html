@@ -1,0 +1,223 @@
+{% extends 'base_section.html'%}
+{% load static %}
+{% block head%}
+<title>Register Page</title>
+<link rel="stylesheet" href="{% static 'css/style.css'%}">
+{% endblock %}
+{% block content %}
+<!-- MAIN CSS -->
+
+
+<br>
+<br>
+<br>
+<section class="contact mb-5 pb-5">
+  <div class="container">
+
+    <div class="row justify-content-center">
+      <div class="col-5">
+        <div class="list-group" id="list-tab" role="tablist">
+          <a class="list-group-item list-group-item-action text-white bg-dark">Kurslar</a>
+          {% for i in course%}
+          <a class="list-group-item list-group-item-action" id="list-home-list" data-toggle="list" href="#list-home"
+            role="tab" aria-controls="home">
+            {{i.name}}
+          </a>
+          {% endfor%}
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="tab-content" id="nav-tabContent">
+          <div class="tab-pane fade show active" id="list-home" role="tabpanel" aria-labelledby="list-home-list">
+            <div class="list-group">
+              <button type="button" class="list-group-item list-group-item-action text-white bg-dark">
+                student names
+              </button>
+              <form action="" method="POST">
+                {% csrf_token %}
+              {% for i in student %}
+              <button type="submit"class="list-group-item list-group-item-action" aria-current="true" value="{{i.username}}" name="uname">
+                {{i.first_name}} {{i.last_name}}
+              </button>
+              {% endfor %}
+            </form>
+            </div>
+          </div>
+          <div class="tab-pane fade" id="list-profile" role="tabpanel" aria-labelledby="list-profile-list">...</div>
+          <div class="tab-pane fade" id="list-messages" role="tabpanel" aria-labelledby="list-messages-list">...</div>
+          <div class="tab-pane fade" id="list-settings" role="tabpanel" aria-labelledby="list-settings-list">...</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <br>
+  <br>
+  <br>
+  <div class="container">
+    <div class="row justify-content-center border">
+      <div class="col-lg-3">
+        <div class="card border-primary">
+          <img src="../about-us-design/user.jpg" alt="Admin" class="rounded mx-auto mt-5" width="150">
+          <div class="card-body">
+
+            <h4 class="card-title">User photo</h4>
+
+          </div>
+          <div class="col-lg-12 col-12">
+            <input type="file" class="form-control border-white py-1" name="photo">
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-6 col-md-7 col-12 d-flex" data-aos="fade-up">
+        
+        <h1 class="m-auto d-block">{{st.user.username}}</h1>
+       
+      </div>
+
+
+      <div class="col-lg-8 mx-auto mt-5 col-md-10 col-12">
+
+        
+        <form action="#" method="post" class="contact-form" id="list-students-info1" data-aos="fade-up"
+          data-aos-delay="300" role="form">
+          <div class="row">
+            <form action="" method="POST">
+   
+            <div class="col-lg-6 col-12">
+              <label for="">Ism</label>
+              <input type="text" class="form-control" name="fname" placeholder="Ism" value="{{st.user.first_name}}">
+            </div>
+
+            <div class="col-lg-6 col-12">
+              <label for="">Familiya</label>
+              <input type="text" class="form-control" name="lname" placeholder="Familiya" value="{{st.user.last_name}}">
+            </div>
+            <div class="col-lg-6 col-12">
+              <label for="">Telefon raqami</label>
+              <input type="tel" class="form-control" name="phone" placeholder="+998" value="{{st.contact_number}}">
+            </div>
+
+            <div class="col-lg-6 col-12">
+              <label for="">Tug'ulgan sana</label>
+              <input type="date" class="form-control" name="Bdate" placeholder="">
+            </div>
+
+            <div class="col-lg-6 col-12 form-check">
+
+              <label class="form-check-label mx-5 my">
+                Jinsi <br>
+                <input type="radio" class="form-check-input" name="gender" id="" value="erkak">
+                Erkak
+              </label>
+              <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="gender" id="" value="ayol">
+                ayol
+              </label>
+
+            </div>
+
+            <div class="col-lg-6 col-12">
+              <label for=""> Tuman </label>
+              <select class="form-control" name="" id="">
+                <option value="{{st.branch}}">{{st.branch}}</option>
+              </select>
+            </div>
+
+            <div class="col-lg-6 col-12">
+              <label for=""> MFY </label>
+              <select class="form-control" name="" id="">
+                {% for i in mfy%}
+                <option value="{{i.name}}">{{i.name}}</option>
+                {%endfor%}
+              </select>
+            </div>
+
+            <div class="col-lg-6 col-12">
+              <label for="">Kurs nomi:</label>
+              <select class="form-control" name="" id="">
+                {% for i in course %}
+                <option value="{{i.name}}">{{i.name}}</option>
+                {% endfor %}
+              </select>
+            </div>
+
+            <div class="col-lg-6 col-12">
+              <label for="">O'qituvchi</label>
+              <select class="form-control" name="" id="">
+                {% for i in teacher %}
+                <option value="{{i.fullname}}">{{i.fullname}}</option>
+                {%endfor%}
+              </select>
+            </div>
+
+            <div class="col-lg-6 col-12">
+              <label for="">gurux</label>
+              <input class="form-control" type="text">
+            </div>
+
+            <div class="col-lg-6 col-12">
+              <label class="w-100" for="">To'lov turi</label>
+              pullik
+              <input class="" type="radio" name="tolov">
+              bepul
+              <input class="" type="radio" name="tolov">
+            </div>
+
+            <div class="col-lg-6 col-12">
+              <label for="">Ijtimoiy holat</label>
+              <input class="form-control" type="text">
+            </div>
+            
+            <div class="col-lg-12 col-7 mt-4">
+              <button type="submit" class="w-25 rounded-pill btn btn-primary mx-auto d-block" id="submit-button"
+                name="submit">Saqlash</button>
+            </div>
+          </form>
+          </div>
+
+        </form>
+      </div>
+
+    </div>
+  </div>
+
+  <br>
+  <br>
+
+
+
+</section>
+<script>
+  var course = document.querySelector('#course');
+  var student = document.querySelector('#student');
+  // var sel3 = document.querySelector('#sel3');
+  var optionsDistrict = district.querySelectorAll('option');
+  var optionsClinic = clinic.querySelectorAll('option');
+  // var options3 = sel3.querySelectorAll('option');
+
+  function giveSelectionClinic(selValue) {
+    clinic.innerHTML = '';
+    for (var i = 0; i < optionsClinic.length; i++) {
+      if (optionsClinic[i].dataset.option === selValue) {
+        clinic.appendChild(optionsClinic[i]);
+      }
+    }
+  }
+
+  function giveSelectionDistrict(selValue) {
+    district.innerHTML = '';
+    for (var i = 0; i < optionsDistrict.length; i++) {
+      if (optionsDistrict[i].dataset.option === selValue) {
+        district.appendChild(optionsDistrict[i]);
+      }
+    }
+  }
+  function showme(id) {
+    document.getElementById(id).hidden = false;
+  }
+  giveSelection(clinic.value);
+</script>
+
+{% endblock %}
